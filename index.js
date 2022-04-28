@@ -4,6 +4,7 @@ const port = 5000
 const bodyParser = require('body-parser');
 const { User} = require ("./models/User");
 
+const config = require('./config/key')
 //application/x-www-form-urlencoded -> bodyParser가 분석해서 가져올수 있게 도와줌
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -11,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
 const mongoose= require('mongoose')
-mongoose.connect('mongodb+srv://test:sparta@cluster0.kycsw.mongodb.net/Cluster0?retryWrites=true&w=majority',{
+mongoose.connect(config.mongoURI,{
     //useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true, useFindAndModify:false
 }).then(()=>console.log('MongoDB 연결'))
 .catch(err => console.log(err))
